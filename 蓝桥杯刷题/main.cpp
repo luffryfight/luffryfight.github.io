@@ -2,28 +2,28 @@
 //1:≥È«©   -- p2
 
 /*O(n^4)*/
-//#include<cstdio>
-//int main(){
-//	int n, m, k[50];
-//	scanf_s("%d %d", &n, &m);
-//	for (int i = 0; i < n; i++){
-//		scanf_s("%d", &k[i]);
-//	}
-//	for (int a = 0; a < n; a++){
-//		for (int b = 0; b < n; b++){
-//			for (int c = 0; c < n; c++){
-//				for (int d = 0; d < n; d++){
-//					if (k[a] + k[b] + k[c] + k[d] == m){
-//						printf("Yes");
-//						return 0;
-//					}
-//				}
-//			}
-//		}
-//	}
-//	
-//	return 0;
-//}
+#include<cstdio>
+int main(){
+	int n, m, k[50];
+	scanf_s("%d %d", &n, &m);
+	for (int i = 0; i < n; i++){
+		scanf_s("%d", &k[i]);
+	}
+	for (int a = 0; a < n; a++){
+		for (int b = 0; b < n; b++){
+			for (int c = 0; c < n; c++){
+				for (int d = 0; d < n; d++){
+					if (k[a] + k[b] + k[c] + k[d] == m){
+						printf("Yes");
+						return 0;
+					}
+				}
+			}
+		}
+	}
+	
+	return 0;
+}
 
 
 /*O(n^3*logn)*/
