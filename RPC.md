@@ -88,15 +88,55 @@ RPC(Remote Procedure Call):远程服务调用，他是一个计算机通信协�
 
 ![底层原理](C:\Users\86137\Desktop\Git\luffryfight.github.io\中间\底层原理.png)
 
+**轮训数组**
+
+![轮训数组](C:\Users\86137\Desktop\Git\luffryfight.github.io\中间\轮训数组.png)
+
+**轮训+权重数组**
+
+![轮训_权重](C:\Users\86137\Desktop\Git\luffryfight.github.io\中间\轮训_权重.png)
+
+![请求路由](C:\Users\86137\Desktop\Git\luffryfight.github.io\中间\请求路由.png)
+
+![路由表功能设计](C:\Users\86137\Desktop\Git\luffryfight.github.io\中间\路由表功能设计.png)
+
+![灰度流量](C:\Users\86137\Desktop\Git\luffryfight.github.io\中间\灰度流量.png)
+
+
+
+**超时处理**
+
+对于长时间没有返回的请求，需要做异常处理，及时释放资源。
+
+![超时处理](C:\Users\86137\Desktop\Git\luffryfight.github.io\中间\超时处理.png)
+
+![超时处理的实现](C:\Users\86137\Desktop\Git\luffryfight.github.io\中间\调用方具体代码.png)
+
+![invoke](C:\Users\86137\Desktop\Git\luffryfight.github.io\中间\invoke.png)
+
+![image-20210423051745373](C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210423051745373.png)
+
+一次性发生几个，提供I/O效率；
+
 ## Rpc服务提供方核心功能设计实现
 
 
 
+**线程池和队列**
 
+将不同类型的请求，放入各自的队列，每个队列分配独立的线程池，资源隔离。
 
+Req Queue可能发生故障，从而发生等待，造成后续队列不能被访问。所以需要多个线程，来隔离资源。
 
+如何分配线程池资源？
 
+- 单队列多线程 1*64: 对于满请求的适应性强。但是在等待的时候，因为锁的缘故，性能就会降低。
+- 多队列单线程 64*1 ：一个队列中如果存在多个超时任务，容易使该队列崩溃。
+- 多队列多线程 n*m
 
+最终选择前者：
+
+![提供方](C:\Users\86137\Desktop\Git\luffryfight.github.io\中间\提供方.png)
 
 
 
